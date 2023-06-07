@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "419862915389",
+    "project_id": "managementapp-8a5e7",
+    "storage_bucket": "managementapp-8a5e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419862915389:android:d0c94bacfde8c1b784fd54",
+        "android_client_info": {
+          "package_name": "com.mccm.managementapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEO_rQOWFK6WTsBhjKywTe2hLtQkSOVmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
