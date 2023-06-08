@@ -87,13 +87,13 @@ fun WelcomeCard(){
                             .zIndex(0f)
                             .wrapContentWidth(Alignment.End),
                         painter = painterResource(id = R.drawable.blue_circle),
-                        contentDescription = "User")
+                        contentDescription = "Circle")
                     Image(
                         modifier = Modifier
                             .zIndex(1f)
                             .wrapContentWidth(Alignment.End),
                         painter = painterResource(id = R.drawable.teacher_learning),
-                        contentDescription = "User")
+                        contentDescription = "Teacher")
                 }
             }
         }

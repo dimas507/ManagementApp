@@ -21,10 +21,12 @@ import com.mccm.managementapp.presentation.ui.theme.Blue900
 fun DefaultButton(
     text: String,
     onClick: () -> Unit,
+    colortext: Color = Color.White,
     color: Color = Blue900,
     icon: ImageVector = Icons.Default.ArrowForward,
     modifier: Modifier,
-    enable: Boolean = true
+    enable: Boolean = true,
+    tinticon: Color = Color.White,
 ){
     Column() {
         Button(
@@ -35,10 +37,12 @@ fun DefaultButton(
         ){
             Icon(
                 imageVector = icon,
-                contentDescription = ""
+                contentDescription = "",
+                tint = tinticon
             )
             Spacer(modifier = Modifier.width(10.dp))
-            Text(text = text)
+            Text(text = text,
+                color = colortext)
         }
     }
 }

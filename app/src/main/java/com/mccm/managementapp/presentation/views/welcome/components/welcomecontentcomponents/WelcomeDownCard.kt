@@ -55,6 +55,7 @@ fun WelcomeDownCard() {
         Row(modifier = Modifier
             .horizontalScroll(rememberScrollState())) {
             Card(modifier = Modifier
+                .padding(start = 10.dp, end = 10.dp)
                 .shadow(10.dp),
                 border = BorderStroke(4.dp, Orange400),
                 colors = CardDefaults.cardColors(Orange400),
@@ -84,8 +85,9 @@ fun WelcomeDownCard() {
                             ,contentDescription = "")
                     }
             }
-            Spacer(modifier = Modifier.padding(start = 20.dp))
+            //Eliminar los siguientes y hacer interactivo
             Card(modifier = Modifier
+                .padding(start = 10.dp, end = 10.dp)
                 .shadow(10.dp),
                 border = BorderStroke(4.dp, Blue400),
                 colors = CardDefaults.cardColors(Blue400),
@@ -117,6 +119,7 @@ fun WelcomeDownCard() {
             }
             Spacer(modifier = Modifier.padding(start = 20.dp))
             Card(modifier = Modifier
+                .padding(start = 10.dp, end = 10.dp)
                 .shadow(10.dp),
                 border = BorderStroke(4.dp, Green400),
                 colors = CardDefaults.cardColors(Green400),
@@ -147,6 +150,7 @@ fun WelcomeDownCard() {
                 }
             }
         }
+
         DefaultButton(text = "All courses"
             , onClick = { /*TODO*/ }
             , modifier = Modifier
@@ -163,7 +167,9 @@ fun WelcomeDownCard() {
         ){
             Row() {
                 Image(
-                    modifier = Modifier.wrapContentWidth(Alignment.End) ,
+                    modifier = Modifier
+                        .wrapContentWidth(Alignment.End)
+                        .padding(top = 20.dp),
                     painter = painterResource( R.drawable.message_day)
                     ,contentDescription = "")
                 Column() {
