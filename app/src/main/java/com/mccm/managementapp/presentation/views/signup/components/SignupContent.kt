@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -105,14 +106,67 @@ fun CardForm(viewModel: SignUpViewModel = hiltViewModel()){
             )
            DefaultOutlinedTextField(
                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-               value = viewModel.username.value,
-               onValueChange = { viewModel.username.value = it },
-               label = "Username",
+               value = "",
+               onValueChange = { "" },
+               label = "Name",
                icon = Icons.Default.Person,
-               validateField = {viewModel.ValidateUsername()},
-               errorMsg = viewModel.usernameErrMsg.value
+               validateField = {},
+               errorMsg = ""
            )
-
+            DefaultOutlinedTextField(
+                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
+                value = "",
+                onValueChange = { "" },
+                label = "Lastname",
+                icon = Icons.Outlined.Person,
+                validateField = {},
+                errorMsg = ""
+            )
+            DefaultOutlinedTextField(
+                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
+                value = "",
+                onValueChange = { "" },
+                label = "NIF",
+                icon = Icons.Outlined.Person,
+                validateField = {},
+                errorMsg = ""
+            )
+            DefaultOutlinedTextField(
+                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
+                value = "",
+                onValueChange = { "" },
+                label = "Address",
+                painter = painterResource(id = R.drawable.location),
+                validateField = {},
+                errorMsg = ""
+            )
+            DefaultOutlinedTextField(
+                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
+                value = "",
+                onValueChange = { "" },
+                label = "Access type",
+                icon = Icons.Outlined.Person,
+                validateField = {},
+                errorMsg = ""
+            )
+            DefaultOutlinedTextField(
+                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
+                value = "",
+                onValueChange = { "" },
+                label = "Access type",
+                icon = Icons.Outlined.Person,
+                validateField = {},
+                errorMsg = ""
+            )
+            DefaultOutlinedTextField(
+                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
+                value = "",
+                onValueChange = { "" },
+                label = "School name",
+                icon = Icons.Outlined.Person,
+                validateField = {},
+                errorMsg = ""
+            )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
                 value = viewModel.email.value,
@@ -123,7 +177,6 @@ fun CardForm(viewModel: SignUpViewModel = hiltViewModel()){
                 validateField = {viewModel.validateEmail()},
                 errorMsg = viewModel.emailErrMsg.value
         )
-
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
                 value = viewModel.password.value,
@@ -134,7 +187,6 @@ fun CardForm(viewModel: SignUpViewModel = hiltViewModel()){
                 validateField = {viewModel.validatePassword()},
                 errorMsg = viewModel.passwordlErrMsg.value
             )
-
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
                 value = viewModel.confirmPassword.value,

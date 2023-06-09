@@ -30,6 +30,11 @@ class SignUpViewModel @Inject constructor()  : ViewModel() {
     var isPasswordValid: MutableState<Boolean> = mutableStateOf(false)
     var passwordlErrMsg: MutableState<String> = mutableStateOf("")
 
+    //NIF
+    var nif: MutableState<String> = mutableStateOf("")
+    var isnifValid: MutableState<Boolean> = mutableStateOf(false)
+    var nifErrMsg: MutableState<String> = mutableStateOf("")
+
     //Button
     var isEnableSignupButton = false
 

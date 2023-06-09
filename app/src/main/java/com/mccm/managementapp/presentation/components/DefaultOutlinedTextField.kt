@@ -10,8 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.node.modifierElementOf
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -26,7 +26,8 @@ fun DefaultOutlinedTextField(
     onValueChange: (value: String) -> Unit,
     validateField: () -> Unit = {},
     label: String,
-    icon: ImageVector,
+    icon: ImageVector? = null,
+    painter: Painter? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     hideText: Boolean = false,
     errorMsg: String = ""
@@ -41,9 +42,17 @@ fun DefaultOutlinedTextField(
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
             label = { Text(label) },
             trailingIcon = {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = "")
+                if (icon != null) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = ""
+                    )
+                } else if (painter != null) {
+                    Icon(
+                        painter = painter,
+                        contentDescription = ""
+                    )
+                }
             },
             visualTransformation =
             if (hideText) PasswordVisualTransformation()

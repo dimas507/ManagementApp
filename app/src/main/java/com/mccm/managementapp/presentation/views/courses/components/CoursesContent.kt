@@ -21,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -147,14 +146,14 @@ fun CoursesContent() {
                                 .align(Alignment.Center)
                                 .zIndex(1f)
                                 .wrapContentWidth(Alignment.End),
-                            painter = painterResource(id = R.drawable.animal_log_img),
-                            contentDescription = "Animal Log")
+                            painter = painterResource(id = R.drawable.plants_img),
+                            contentDescription = "Plants Log")
                     }
                     Text(modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .padding(start = 10.dp, end = 10.dp)
                         .wrapContentWidth(Alignment.CenterHorizontally),
-                        text = "Animal",
+                        text = "Plants",
                         color = Color.Black,
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
@@ -164,7 +163,7 @@ fun CoursesContent() {
                         .padding(start = 10.dp, end = 10.dp, bottom = 20.dp)
                         .wrapContentWidth(Alignment.CenterHorizontally),
                         textAlign = TextAlign.Center,
-                        text = "4/5",
+                        text = "3/3",
                         color = Color.Black,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold)
@@ -176,6 +175,58 @@ fun CoursesContent() {
                         contentDescription = "Animal Log")
                 }
             }
+            Card(modifier = Modifier
+                .padding(start = 20.dp, end = 20.dp)
+                .shadow(10.dp),
+                border = BorderStroke(4.dp, Color.White),
+                colors = CardDefaults.cardColors(Color.White),
+                elevation = CardDefaults.cardElevation(10.dp),
+                onClick = { /*TODO*/ }
+            ){
+                Column(modifier = Modifier.padding(30.dp)) {
+                    Box(modifier = Modifier.padding(10.dp)){
+                        Image(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .zIndex(0f)
+                                .wrapContentWidth(Alignment.End),
+                            painter = painterResource(id = R.drawable.white_circle),
+                            contentDescription = "Withe Circle")
+                        Image(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .zIndex(1f)
+                                .wrapContentWidth(Alignment.End),
+                            painter = painterResource(id = R.drawable.plants_img),
+                            contentDescription = "Plants Log")
+                    }
+                    Text(modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(start = 10.dp, end = 10.dp)
+                        .wrapContentWidth(Alignment.CenterHorizontally),
+                        text = "Foods",
+                        color = Color.Black,
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center)
+                    Text(modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(start = 10.dp, end = 10.dp, bottom = 20.dp)
+                        .wrapContentWidth(Alignment.CenterHorizontally),
+                        textAlign = TextAlign.Center,
+                        text = "3/3",
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold)
+                    Image(
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .wrapContentWidth(Alignment.End),
+                        painter = painterResource(id = R.drawable.foods_log_img),
+                        contentDescription = "Foods Log")
+                }
+            }
+            //hasta aqui debo eliminar
         }
     }
 }
