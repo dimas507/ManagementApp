@@ -11,9 +11,13 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor()  : ViewModel() {
 
     //Username
-    var username: MutableState<String> = mutableStateOf("")
-    var isUsernameValid: MutableState<Boolean> = mutableStateOf(false)
-    var usernameErrMsg: MutableState<String> = mutableStateOf("")
+    var name:MutableState<String> = mutableStateOf("")
+    var isnameValid: MutableState<Boolean> = mutableStateOf(false)
+    var nameErrMsg: MutableState<String> = mutableStateOf("")
+
+    var lastname:MutableState<String> = mutableStateOf("")
+    var islastnameValid: MutableState<Boolean> = mutableStateOf(false)
+    var lastnameErrMsg: MutableState<String> = mutableStateOf("")
 
     //Confirm Password
     var confirmPassword: MutableState<String> = mutableStateOf("")
@@ -35,19 +39,120 @@ class SignUpViewModel @Inject constructor()  : ViewModel() {
     var isnifValid: MutableState<Boolean> = mutableStateOf(false)
     var nifErrMsg: MutableState<String> = mutableStateOf("")
 
+    //Address
+    var address: MutableState<String> = mutableStateOf("")
+    var isaddressValid: MutableState<Boolean> = mutableStateOf(false)
+    var addressErrMsg: MutableState<String> = mutableStateOf("")
+
+    //Birthday
+    var birthday: MutableState<String> = mutableStateOf("")
+
+    //Access type
+    var accessType: MutableState<String> = mutableStateOf("")
+    var isaccessTypeValid: MutableState<Boolean> = mutableStateOf(false)
+    var accessTypeErrMsg: MutableState<String> = mutableStateOf("")
+
+    //Gender
+    var gender: MutableState<String> = mutableStateOf("")
+    var isgenderValid: MutableState<Boolean> = mutableStateOf(false)
+    var genderErrMsg: MutableState<String> = mutableStateOf("")
+
+    //School name
+    var schoolName: MutableState<String> = mutableStateOf("")
+    var isschoolNameValid: MutableState<Boolean> = mutableStateOf(false)
+    var schoolNameErrMsg: MutableState<String> = mutableStateOf("")
+
     //Button
     var isEnableSignupButton = false
 
     //functions
+    fun isValidString(input: String): Boolean {
+        val pattern = Regex("^[a-zA-Z ]+$")
+        return pattern.matches(input)
+    }
 
-    fun ValidateUsername(){
-        if (username.value.length >=5){
-            isUsernameValid.value = true
-            usernameErrMsg.value = ""
+    fun ValidateName(){
+
+        if (name.value.length >=3 && isValidString(name.value)){
+            isnameValid.value = true
+            nameErrMsg.value = ""
         }
         else{
-            isUsernameValid.value = false
-            usernameErrMsg.value = "You must enter at least 5 characters"
+            isnameValid.value = false
+            nameErrMsg.value = "You must enter at least 3 characters in the name and only use letters"
+        }
+        enableSignUpButton()
+    }
+    fun ValidateLastname(){
+
+        if (lastname.value.length >=3 && isValidString(lastname.value)){
+            islastnameValid.value = true
+            lastnameErrMsg.value = ""
+        }
+        else{
+            islastnameValid.value = false
+            lastnameErrMsg.value = "You must enter at least 3 characters in the lastname and only use letters"
+        }
+        enableSignUpButton()
+    }
+
+    fun ValidateNIF(){
+
+        if (nif.value.length >=4){
+            isnifValid.value = true
+            nifErrMsg.value = ""
+        }
+        else{
+            isnifValid.value = false
+            nifErrMsg.value = "You must enter at least 4 characters in the NIF"
+        }
+        enableSignUpButton()
+    }
+    fun ValidateAccessType(){
+
+        if (accessType.value.length >=4){
+            isaccessTypeValid.value = true
+            accessTypeErrMsg.value = ""
+        }
+        else{
+            isaccessTypeValid.value = false
+            accessTypeErrMsg.value = "You must enter at least 4 characters in the access type"
+        }
+        enableSignUpButton()
+    }
+    fun ValidateAddress(){
+
+        if (address.value.length >=5){
+            isaddressValid.value = true
+            addressErrMsg.value = ""
+        }
+        else{
+            isaddressValid.value = false
+            addressErrMsg.value = "You must enter at least 5 characters in the addess"
+        }
+        enableSignUpButton()
+    }
+    fun ValidateGender(){
+
+        if (gender.value.length >=1){
+            isgenderValid.value = true
+            genderErrMsg.value = ""
+        }
+        else{
+            isgenderValid.value = false
+            genderErrMsg.value = "You must enter at least 1 characters in the gender"
+        }
+        enableSignUpButton()
+    }
+    fun ValidateSchoolName(){
+
+        if (schoolName.value.length >=3){
+            isschoolNameValid.value = true
+            schoolNameErrMsg.value = ""
+        }
+        else{
+            isschoolNameValid.value = false
+            schoolNameErrMsg.value = "You must enter at least 4 characters in the school name"
         }
         enableSignUpButton()
     }
@@ -92,6 +197,12 @@ class SignUpViewModel @Inject constructor()  : ViewModel() {
         isEnableSignupButton = isEmailValid.value == true &&
                 isPasswordValid.value == true &&
                 isconfirmPassword.value == true &&
-                isUsernameValid.value == true
+                isnameValid.value == true &&
+                islastnameValid.value == true &&
+                isnifValid.value == true &&
+                isaddressValid.value == true &&
+                isaccessTypeValid.value == true &&
+                isgenderValid.value == true &&
+                isschoolNameValid.value == true
     }
 }

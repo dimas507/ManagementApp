@@ -97,7 +97,7 @@ fun LoginContent (navController:NavHostController, viewModel: LoginViewModel = h
                     modifier = Modifier.padding(15.dp),
                     value = viewModel.email.value,
                     onValueChange = { viewModel.email.value = it },
-                    label = "Username",
+                    label = "Email",
                     icon = Icons.Default.Person,
                     keyboardType = KeyboardType.Email,
                     errorMsg = viewModel.emailErrMsg.value,
@@ -145,10 +145,14 @@ fun LoginContent (navController:NavHostController, viewModel: LoginViewModel = h
                             popUpTo(AppScreen.Login.route){inclusive = true}
                         }
                     }
-                    Toast.makeText(LocalContext.current, "Loggin", Toast.LENGTH_LONG).show()
+                    Toast.makeText(LocalContext.current,
+                        "Loggin",
+                        Toast.LENGTH_LONG).show()
                 }
                 is Response.Failure ->{
-                    Toast.makeText(LocalContext.current, it.exception?.message ?:"Error desconocido", Toast.LENGTH_LONG).show()
+                    Toast.makeText(LocalContext.current,
+                        it.exception?.message ?:"Error desconocido",
+                        Toast.LENGTH_LONG).show()
                 }
 
                 else -> {}

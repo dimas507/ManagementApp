@@ -21,8 +21,6 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -79,12 +77,6 @@ fun BoxHeader(){
 @Composable
 fun CardForm(viewModel: SignUpViewModel = hiltViewModel()){
 
-    var email by remember {
-        mutableStateOf("")
-    }
-    var password by remember {
-        mutableStateOf("")
-    }
     Card(
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, top = 250.dp)
@@ -106,66 +98,73 @@ fun CardForm(viewModel: SignUpViewModel = hiltViewModel()){
             )
            DefaultOutlinedTextField(
                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-               value = "",
-               onValueChange = { "" },
+               value = viewModel.name.value,
+               onValueChange = { viewModel.name.value = it },
                label = "Name",
                icon = Icons.Default.Person,
-               validateField = {},
-               errorMsg = ""
+               validateField = {viewModel.ValidateName()},
+               errorMsg = viewModel.nameErrMsg.value
            )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = "",
-                onValueChange = { "" },
+                value = viewModel.lastname.value,
+                onValueChange = { viewModel.lastname.value = it },
                 label = "Lastname",
                 icon = Icons.Outlined.Person,
-                validateField = {},
-                errorMsg = ""
+                validateField = {viewModel.ValidateLastname()},
+                errorMsg = viewModel.lastnameErrMsg.value
             )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = "",
-                onValueChange = { "" },
+                value = viewModel.nif.value,
+                onValueChange = { viewModel.nif.value = it },
                 label = "NIF",
-                icon = Icons.Outlined.Person,
-                validateField = {},
-                errorMsg = ""
+                painter = painterResource(id = R.drawable.pin),
+                validateField = {viewModel.ValidateNIF()},
+                errorMsg = viewModel.nifErrMsg.value
             )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = "",
-                onValueChange = { "" },
+                value = viewModel.address.value,
+                onValueChange = { viewModel.address.value = it },
                 label = "Address",
-                painter = painterResource(id = R.drawable.location),
-                validateField = {},
-                errorMsg = ""
+                painter = painterResource(id = R.drawable.my_location),
+                validateField = {viewModel.ValidateAddress()},
+                errorMsg = viewModel.addressErrMsg.value
             )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = "",
-                onValueChange = { "" },
+                value = viewModel.birthday.value,
+                onValueChange = { viewModel.birthday.value = it },
+                label = "Birthday",
+                painter = painterResource(id = R.drawable.calendar_month)
+            )
+            DefaultOutlinedTextField(
+                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
+                value = viewModel.accessType.value,
+                onValueChange = { viewModel.accessType.value = it },
                 label = "Access type",
-                icon = Icons.Outlined.Person,
-                validateField = {},
-                errorMsg = ""
+                painter = painterResource(id = R.drawable.groups),
+                validateField = {viewModel.ValidateAccessType()},
+                errorMsg = viewModel.accessTypeErrMsg.value
             )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = "",
-                onValueChange = { "" },
-                label = "Access type",
-                icon = Icons.Outlined.Person,
-                validateField = {},
-                errorMsg = ""
+                value = viewModel.gender.value,
+                onValueChange = { viewModel.gender.value = it },
+                label = "Gender",
+                painter = painterResource(id = R.drawable.transgender_gender),
+                validateField = {viewModel.ValidateGender()},
+                errorMsg = viewModel.genderErrMsg.value
             )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = "",
-                onValueChange = { "" },
+                value = viewModel.schoolName.value,
+                onValueChange = { viewModel.schoolName.value = it },
                 label = "School name",
-                icon = Icons.Outlined.Person,
-                validateField = {},
-                errorMsg = ""
+                painter = painterResource(id = R.drawable.house),
+                validateField = {viewModel.ValidateSchoolName()},
+                errorMsg = viewModel.schoolNameErrMsg.value
             )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
