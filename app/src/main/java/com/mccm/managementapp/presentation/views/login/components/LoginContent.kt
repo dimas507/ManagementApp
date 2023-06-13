@@ -141,9 +141,8 @@ fun LoginContent (navController:NavHostController, viewModel: LoginViewModel = h
                 }
                 is Response.Success -> {
                     LaunchedEffect(Unit) {
-                        navController.navigate(route = AppScreen.Welcome.route){
-                            popUpTo(AppScreen.Login.route){inclusive = true}
-                        }
+                        navController.popBackStack(AppScreen.Login.route, true)
+                        navController.navigate(route = AppScreen.Welcome.route)
                     }
                     Toast.makeText(LocalContext.current,
                         "Loggin",

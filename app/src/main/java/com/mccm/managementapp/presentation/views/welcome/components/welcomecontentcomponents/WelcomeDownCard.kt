@@ -198,7 +198,7 @@ fun WelcomeDownCard() {
             }
             Spacer(modifier = Modifier.padding(bottom = 20.dp))
         }
-
+        Spacer(modifier = Modifier.padding( 20.dp))
     }
 }
 

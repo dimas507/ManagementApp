@@ -16,12 +16,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.ui.theme.Gray500
 import com.mccm.managementapp.presentation.ui.theme.Indigo900
+import com.mccm.managementapp.presentation.views.welcome.WelcomeViewModel
 
 @Composable
-fun WelcomeBoxHeader(){
+fun WelcomeBoxHeader(navController: NavHostController, viewModel: WelcomeViewModel = hiltViewModel()){
+    Spacer(modifier = Modifier.padding(top = 30.dp))
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(20.dp)) {
@@ -37,13 +41,13 @@ fun WelcomeBoxHeader(){
             Spacer(modifier = Modifier.width(15.dp))
             Column {
                 Text(
-                    text = "Username",
+                    text = viewModel.userData.username.uppercase(),
                     color = Color.Black,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "School name",
+                    text = viewModel.userData.schoolName.uppercase(),
                     color = Gray500,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Light

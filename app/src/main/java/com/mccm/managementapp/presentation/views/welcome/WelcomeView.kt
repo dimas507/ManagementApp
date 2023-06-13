@@ -22,7 +22,7 @@ fun WelcomeView(navController: NavHostController, viewModel: WelcomeViewModel = 
 
     Scaffold(
         topBar = { WelcomeTopBar(navController) },
-        content = {WelcomeContent()},
+        content = {WelcomeContent(navController)},
         bottomBar = { }
     )
 }

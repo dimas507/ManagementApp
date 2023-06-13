@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -33,7 +32,7 @@ fun ProfileContent (navController: NavHostController, viewModel: ProfileViewMode
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(){
+        Box{
             Image(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -64,11 +63,15 @@ fun ProfileContent (navController: NavHostController, viewModel: ProfileViewMode
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Italic,
-            text = "Username")
+            text = viewModel.userData.username,
+            color = Color.Black
+        )
         Text(
             fontSize = 15.sp,
             fontStyle = FontStyle.Italic,
-            text = "User email")
+            text = viewModel.userData.email,
+            color = Color.Black
+        )
         Spacer(modifier = Modifier.height(30.dp))
         DefaultButton(
             text = "Edit data",
@@ -82,7 +85,6 @@ fun ProfileContent (navController: NavHostController, viewModel: ProfileViewMode
             onClick = { viewModel.logout()
                 navController.navigate(route = AppScreen.Login.route){
                     popUpTo(AppScreen.Welcome.route){inclusive = true}
-                    popUpTo(AppScreen.Profile.route)
                 }
             },
             modifier = Modifier.width(200.dp),
