@@ -46,7 +46,7 @@ fun WelcomeCard(){
         border = BorderStroke(4.dp, Color.White),
         colors = CardDefaults.cardColors(Color.White),
         elevation = CardDefaults.cardElevation(7.dp)
-    ) {
+    ){
         Column(modifier = Modifier
             .padding(15.dp)
             .background(color = White)) {

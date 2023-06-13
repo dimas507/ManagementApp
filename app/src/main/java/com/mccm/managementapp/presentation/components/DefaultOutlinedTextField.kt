@@ -7,6 +7,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,7 +32,8 @@ fun DefaultOutlinedTextField(
     painter: Painter? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     hideText: Boolean = false,
-    errorMsg: String = ""
+    errorMsg: String = "",
+    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(Color.Black)
     ){
     Column() {
         OutlinedTextField(
@@ -56,7 +59,8 @@ fun DefaultOutlinedTextField(
             },
             visualTransformation =
             if (hideText) PasswordVisualTransformation()
-            else VisualTransformation.None
+            else VisualTransformation.None,
+            colors = colors
         )
         Text(
             modifier=Modifier.padding(start = 20.dp),

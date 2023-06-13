@@ -1,5 +1,6 @@
 package com.mccm.managementapp.presentation.views.signup
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absolutePadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,31 +21,36 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
+import com.mccm.managementapp.domain.model.Response
 import com.mccm.managementapp.presentation.components.DefaultButton
 import com.mccm.managementapp.presentation.components.DefaultOutlinedTextField
+import com.mccm.managementapp.presentation.navigation.AppScreen
 import com.mccm.managementapp.presentation.ui.theme.Blue900
 import com.mccm.managementapp.presentation.ui.theme.Green900
-import com.mccm.managementapp.presentation.ui.theme.ManagementAppTheme
 import com.mccm.managementapp.presentation.ui.theme.Orange2
 import com.mccm.managementapp.presentation.ui.theme.White
 
 @Composable
-fun SignupContent(){
-
+fun SignupContent(navController: NavHostController, viewModel: SignUpViewModel = hiltViewModel()){
+    val signupFlow = viewModel.signuoFlow.collectAsState()
     Box(modifier = Modifier
         .fillMaxWidth()
         .verticalScroll(rememberScrollState()))
@@ -51,8 +58,30 @@ fun SignupContent(){
         BoxHeader()
         CardForm()
     }
+    signupFlow.value.let {
+        when(it) {
+            Response.Loading -> {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+            is Response.Success -> {
+                LaunchedEffect(Unit){
+                    viewModel.createUser()
+                    navController.popBackStack(AppScreen.Login.route, true)
+                    navController.navigate(route = AppScreen.Welcome.route)
+                }
+            }
+            is Response.Failure ->{
+                Toast.makeText(LocalContext.current, it.exception?.message ?: "unknown error Registe" , Toast.LENGTH_LONG).show()
+            }
+            else -> {}
+        }
+    }
 }
-
 @Composable
 fun BoxHeader(){
     Box(
@@ -76,7 +105,6 @@ fun BoxHeader(){
 
 @Composable
 fun CardForm(viewModel: SignUpViewModel = hiltViewModel()){
-
     Card(
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, top = 250.dp)
@@ -175,7 +203,7 @@ fun CardForm(viewModel: SignUpViewModel = hiltViewModel()){
                 keyboardType = KeyboardType.Email,
                 validateField = {viewModel.validateEmail()},
                 errorMsg = viewModel.emailErrMsg.value
-        )
+            )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
                 value = viewModel.password.value,
@@ -196,25 +224,15 @@ fun CardForm(viewModel: SignUpViewModel = hiltViewModel()){
                 validateField = {viewModel.ValidateConfirmPassword()},
                 errorMsg = viewModel.confirmPasswordErrMsg.value
             )
-
             DefaultButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(35.dp),
                 text = "Register",
-                onClick = { /*TODO*/ },
+                onClick = {viewModel.onSignUp()},
                 enable = viewModel.isEnableSignupButton,
                 color = Green900
             )
         }
-    }
-}
-
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewSignupContentContent() {
-    ManagementAppTheme {
-        SignupContent()
     }
 }

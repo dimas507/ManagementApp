@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.mccm.managementapp.presentation.views.login.LoginView
+import com.mccm.managementapp.presentation.views.profile.ProfileView
 import com.mccm.managementapp.presentation.views.signup.SignUpView
 import com.mccm.managementapp.presentation.views.welcome.WelcomeView
 
@@ -25,6 +26,10 @@ fun AppNavigation(navController: NavHostController){
 
         composable(route = AppScreen.Welcome.route){
             WelcomeView(navController)
+        }
+
+        composable(route = AppScreen.Profile.route){
+            ProfileView(navController)
         }
     }
 }

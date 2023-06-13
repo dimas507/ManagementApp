@@ -24,14 +24,8 @@ fun SignUpView(navController: NavHostController){
                  )
         },
         content = {
-                  SignupContent()
+                  SignupContent(navController)
         },
         bottomBar = {}
     )
-}
-
-@Preview
-@Composable
-fun PreviewSignUpView() {
-    SignUpView(rememberNavController())
 }

@@ -21,16 +21,9 @@ import com.mccm.managementapp.presentation.views.welcome.components.WelcomeTopBa
 fun WelcomeView(navController: NavHostController, viewModel: WelcomeViewModel = hiltViewModel()) {
 
     Scaffold(
-        topBar = {DefaultButton(
-            text = "Logout",
-            onClick = { viewModel.logout()
-                navController.navigate(route = AppScreen.Login.route){
-                    popUpTo(AppScreen.Welcome.route){inclusive = true}
-                }
-            },
-            modifier = Modifier)},
+        topBar = { WelcomeTopBar(navController) },
         content = {WelcomeContent()},
-        bottomBar = { WelcomeBottonBar() }
+        bottomBar = { }
     )
 }
 

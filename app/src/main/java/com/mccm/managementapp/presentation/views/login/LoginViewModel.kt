@@ -12,7 +12,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +21,6 @@ class LoginViewModel @Inject constructor(private val authUseCases: AuthUseCases)
     var email: MutableState<String> = mutableStateOf("")
     var isEmailValid: MutableState<Boolean> = mutableStateOf(false)
     var emailErrMsg: MutableState<String> = mutableStateOf("")
-
 
     //Password
     var password: MutableState<String> = mutableStateOf("")
@@ -43,7 +41,6 @@ class LoginViewModel @Inject constructor(private val authUseCases: AuthUseCases)
         }
     }
 
-
     //functions
     fun validateEmail(){
         if(Patterns.EMAIL_ADDRESS.matcher(email.value).matches()) {
@@ -56,7 +53,6 @@ class LoginViewModel @Inject constructor(private val authUseCases: AuthUseCases)
             }
         enableLogButton()
     }
-
     fun validatePassword(){
         if(password.value.length >= 6){
             isPasswordValid.value = true
@@ -64,21 +60,15 @@ class LoginViewModel @Inject constructor(private val authUseCases: AuthUseCases)
         }
         else {
             passwordlErrMsg.value = "You must enter at least 6 characters"
-
         }
         enableLogButton()
     }
-
-
     fun login() = viewModelScope.launch {
         _loginflow.value = Response.Loading
         val result = authUseCases.login(email.value, password.value)
         _loginflow.value = result
     }
-
     fun enableLogButton(){
         isEnableLoginButton = isEmailValid.value == true && isPasswordValid.value == true
     }
-
-
 }

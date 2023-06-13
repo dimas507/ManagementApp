@@ -4,11 +4,20 @@ import android.util.Patterns
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
+import com.mccm.managementapp.domain.model.Response
+import com.mccm.managementapp.domain.model.User
+import com.mccm.managementapp.domain.use_cases.auth.AuthUseCases
+import com.mccm.managementapp.domain.use_cases.users.UsersUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor()  : ViewModel() {
+class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases, private val usersUseCases: UsersUseCases)  : ViewModel() {
 
     //Username
     var name:MutableState<String> = mutableStateOf("")
@@ -193,6 +202,34 @@ class SignUpViewModel @Inject constructor()  : ViewModel() {
         enableSignUpButton()
     }
 
+    private val _signupFlow = MutableStateFlow<Response<FirebaseUser>?>(null)
+    val signuoFlow: StateFlow<Response<FirebaseUser>?> = _signupFlow
+
+    var user = User()
+    fun onSignUp(){
+        user.name = name.value
+        user.lastname = lastname.value
+        user.nif = nif.value
+        user.address = address.value
+        user.birthday = birthday.value
+        user.accesType = accessType.value
+        user.gender = gender.value
+        user.schoolName = schoolName.value
+        user.email = email.value
+        user.password = password.value
+        user.username = "${name.value} ${lastname.value}"
+
+        signup(user)
+    }
+    fun createUser() = viewModelScope.launch {
+        user.id  = authUseCases.getCurrentUser()!!.uid
+        usersUseCases.create(user)
+    }
+    fun signup(user: User) = viewModelScope.launch {
+        _signupFlow.value = Response.Loading
+        val result = authUseCases.signup(user)
+        _signupFlow.value = result
+    }
     fun enableSignUpButton(){
         isEnableSignupButton = isEmailValid.value == true &&
                 isPasswordValid.value == true &&

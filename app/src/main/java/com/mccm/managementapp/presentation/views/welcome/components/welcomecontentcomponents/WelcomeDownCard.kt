@@ -169,12 +169,13 @@ fun WelcomeDownCard() {
                 Image(
                     modifier = Modifier
                         .wrapContentWidth(Alignment.End)
-                        .padding(top = 20.dp),
+                        .padding(top = 20.dp)
+                        .size(100.dp),
                     painter = painterResource( R.drawable.message_day)
                     ,contentDescription = "")
-                Column() {
+                Column(modifier = Modifier.padding(end = 10.dp)) {
                     Text(modifier = Modifier
-                        .padding(start = 10.dp, top = 10.dp)
+                        .padding(start = 10.dp, top = 20.dp)
                         .wrapContentWidth(Alignment.Start),
                         text = "Message of the day",
                         color = Color.Black,
@@ -185,7 +186,7 @@ fun WelcomeDownCard() {
                     )
                     Text(modifier = Modifier
                         .paddingFromBaseline(top = 30.dp)
-                        .padding(start = 20.dp, end = 10.dp)
+                        .padding(start = 10.dp, end = 10.dp)
                         .wrapContentWidth(Alignment.Start),
                         text = "Failure is temporary and natural. Do not get yourself down by one.",
                         color = Color.Black,
@@ -197,7 +198,7 @@ fun WelcomeDownCard() {
             }
             Spacer(modifier = Modifier.padding(bottom = 20.dp))
         }
-        Spacer(modifier = Modifier.padding(30.dp))
+
     }
 }
 
