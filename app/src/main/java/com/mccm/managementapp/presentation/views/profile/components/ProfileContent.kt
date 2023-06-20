@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
@@ -28,8 +29,11 @@ import com.mccm.managementapp.presentation.ui.theme.Green900
 import com.mccm.managementapp.presentation.views.profile.ProfileViewModel
 
 @Composable
-fun ProfileContent (navController: NavHostController, viewModel: ProfileViewModel = hiltViewModel()) {
-    Column(modifier = Modifier.fillMaxSize(),
+fun ProfileContent (navController: NavHostController,
+                    viewModel: ProfileViewModel = hiltViewModel()) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(top = 30.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box{
@@ -44,7 +48,7 @@ fun ProfileContent (navController: NavHostController, viewModel: ProfileViewMode
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 Spacer(modifier = Modifier.height(70.dp))
-                Text(text = "Welcome",
+                Text(text = "Profile",
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
@@ -93,8 +97,4 @@ fun ProfileContent (navController: NavHostController, viewModel: ProfileViewMode
     }
 }
 
-@Composable
-fun ProfileCard(){
-
-}
 

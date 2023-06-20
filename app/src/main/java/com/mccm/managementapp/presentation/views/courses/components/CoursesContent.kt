@@ -6,9 +6,11 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
@@ -25,29 +27,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.components.DefaultButton
 import com.mccm.managementapp.presentation.ui.theme.Indigo900
-import com.mccm.managementapp.presentation.ui.theme.ManagementAppTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CoursesContent() {
-    Box(modifier = Modifier.size(200.dp)) {
+fun CoursesContent(navController: NavHostController) {
+    Spacer(modifier = Modifier.width(20.dp))
+    Box() {
         Image(
             modifier = Modifier
                 .wrapContentWidth(Alignment.End)
                 .align(Alignment.TopCenter)
-                .fillMaxWidth()
-                .size(312.dp),
+                .fillMaxWidth().size(350.dp),
             painter = painterResource( R.drawable.indigobluemidlecircle),
             contentDescription = "")
     }
+
     Column(modifier = Modifier
         .padding(start = 30.dp, end = 30.dp, top = 100.dp)) {
         Row() {
@@ -197,14 +199,14 @@ fun CoursesContent() {
                                 .align(Alignment.Center)
                                 .zIndex(1f)
                                 .wrapContentWidth(Alignment.End),
-                            painter = painterResource(id = R.drawable.plants_img),
-                            contentDescription = "Plants Log")
+                            painter = painterResource(id = R.drawable.foods_log_img),
+                            contentDescription = "Animal Log")
                     }
                     Text(modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .padding(start = 10.dp, end = 10.dp)
                         .wrapContentWidth(Alignment.CenterHorizontally),
-                        text = "Foods",
+                        text = "Animal",
                         color = Color.Black,
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
@@ -214,7 +216,7 @@ fun CoursesContent() {
                         .padding(start = 10.dp, end = 10.dp, bottom = 20.dp)
                         .wrapContentWidth(Alignment.CenterHorizontally),
                         textAlign = TextAlign.Center,
-                        text = "3/3",
+                        text = "4/5",
                         color = Color.Black,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold)
@@ -222,8 +224,8 @@ fun CoursesContent() {
                         modifier = Modifier
                             .padding(10.dp)
                             .wrapContentWidth(Alignment.End),
-                        painter = painterResource(id = R.drawable.foods_log_img),
-                        contentDescription = "Foods Log")
+                        painter = painterResource(id = R.drawable.barra_img),
+                        contentDescription = "Animal Log")
                 }
             }
             //hasta aqui debo eliminar
@@ -232,10 +234,3 @@ fun CoursesContent() {
 }
 
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewCoursesContent() {
-    ManagementAppTheme {
-        CoursesContent()
-    }
-}

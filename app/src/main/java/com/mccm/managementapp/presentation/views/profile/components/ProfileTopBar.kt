@@ -1,4 +1,18 @@
 package com.mccm.managementapp.presentation.views.profile.components
 
-class ProfileTopBar {
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
+import com.mccm.managementapp.presentation.components.DefaultInsideTopBar
+import com.mccm.managementapp.presentation.components.DefaultTopBar
+import com.mccm.managementapp.presentation.ui.theme.Indigo700
+import com.mccm.managementapp.presentation.ui.theme.Indigo900
+
+@Composable
+fun ProfileTopBar(navController: NavHostController) {
+    DefaultInsideTopBar(navController,
+        showBack = true,
+        colorBackground = Indigo900,
+        tint = Color.White
+    )
 }

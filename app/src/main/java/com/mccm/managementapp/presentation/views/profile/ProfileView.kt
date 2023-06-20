@@ -7,13 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.mccm.managementapp.presentation.views.profile.components.ProfileContent
+import com.mccm.managementapp.presentation.views.profile.components.ProfileTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileView(navController: NavHostController, viewModel: ProfileViewModel = hiltViewModel()) {
     Scaffold(
-        topBar = {},
+        topBar = { ProfileTopBar(navController)},
         content = { ProfileContent(navController) },
         bottomBar = {}
     )
