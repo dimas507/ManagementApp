@@ -8,5 +8,5 @@ import com.mccm.managementapp.presentation.components.DefaultInsideTopBar
 
 @Composable
 fun CoursesTopBar(navController: NavHostController) {
-    DefaultInsideTopBar(navController, showBack = true, tint = Color.White)
+    DefaultInsideTopBar(navController, colorBackground = Color.White)
 }

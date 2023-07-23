@@ -24,7 +24,8 @@ import com.mccm.managementapp.presentation.ui.theme.Indigo900
 import com.mccm.managementapp.presentation.views.welcome.WelcomeViewModel
 
 @Composable
-fun WelcomeBoxHeader(navController: NavHostController, viewModel: WelcomeViewModel = hiltViewModel()){
+fun WelcomeBoxHeader(navController: NavHostController,
+                     viewModel: WelcomeViewModel = hiltViewModel()){
     Spacer(modifier = Modifier.padding(top = 30.dp))
     Column(modifier = Modifier
         .fillMaxWidth()

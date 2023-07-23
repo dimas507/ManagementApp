@@ -21,7 +21,7 @@ import com.mccm.managementapp.presentation.views.welcome.components.WelcomeTopBa
 fun WelcomeView(navController: NavHostController, viewModel: WelcomeViewModel = hiltViewModel()) {
 
     Scaffold(
-        topBar = { WelcomeTopBar(navController) },
+        topBar = {WelcomeTopBar(navController)},
         content = {WelcomeContent(navController)},
         bottomBar = { }
     )

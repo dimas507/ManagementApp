@@ -5,6 +5,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import com.mccm.managementapp.presentation.views.courses.components.CoursesBottonBar
 import com.mccm.managementapp.presentation.views.courses.components.CoursesContent
 import com.mccm.managementapp.presentation.views.courses.components.CoursesTopBar
 
@@ -15,6 +16,6 @@ fun CoursesView(navController: NavHostController) {
     Scaffold(
         topBar = {CoursesTopBar(navController)},
         content = {CoursesContent(navController)},
-        bottomBar = {}
+        bottomBar = { CoursesBottonBar(navController)}
     )
 }

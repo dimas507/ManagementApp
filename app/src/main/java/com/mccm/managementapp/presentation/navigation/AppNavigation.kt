@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.mccm.managementapp.presentation.views.courses.CoursesView
 import com.mccm.managementapp.presentation.views.login.LoginView
 import com.mccm.managementapp.presentation.views.profile.ProfileView
+import com.mccm.managementapp.presentation.views.profile_edit.ProfileEditView
 import com.mccm.managementapp.presentation.views.signup.SignUpView
 import com.mccm.managementapp.presentation.views.welcome.WelcomeView
 
@@ -35,6 +36,10 @@ fun AppNavigation(navController: NavHostController){
 
         composable(route = AppScreen.Courses.route){
             CoursesView(navController)
+        }
+
+        composable(route = AppScreen.ProfileEdit.route){
+            ProfileEditView(navController)
         }
     }
 }

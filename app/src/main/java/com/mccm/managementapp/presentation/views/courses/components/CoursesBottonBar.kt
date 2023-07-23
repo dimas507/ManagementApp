@@ -1,4 +1,10 @@
 package com.mccm.managementapp.presentation.views.courses.components
 
-class CoursesBottonBar {
+
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+
+@Composable
+fun CoursesBottonBar(navController: NavHostController) {
+
 }

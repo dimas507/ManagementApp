@@ -10,9 +10,5 @@ import com.mccm.managementapp.presentation.ui.theme.Indigo900
 
 @Composable
 fun ProfileTopBar(navController: NavHostController) {
-    DefaultInsideTopBar(navController,
-        showBack = true,
-        colorBackground = Indigo900,
-        tint = Color.White
-    )
+
 }

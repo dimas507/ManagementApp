@@ -5,11 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Lock
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -20,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,10 +24,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.navigation.AppScreen
 import com.mccm.managementapp.presentation.ui.theme.Indigo900
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -39,12 +38,46 @@ fun DefaultInsideTopBar (navController: NavHostController,
                          showBack: Boolean = false,
                          colorBackground: Color = Indigo900,
                          tint: Color = Color.Black
-) {
+)
+{
     var expanded by remember { mutableStateOf(false) }
     var currentRoute by rememberSaveable { mutableStateOf("Welcome") }
 
+    val navigationIcon: @Composable (() -> Unit)? = if (showBack) {
+        {
+            IconButton(onClick = { navController.popBackStack() }) {
+                Icon(
+                    Icons.Filled.ArrowBack,
+                    contentDescription = "Arrow back",
+                    tint = tint
+                )
+            }
+        }
+    } else {
+        {
+            IconButton(onClick = { expanded = true }) {
+                Icon(
+                    Icons.Filled.Menu,
+                    contentDescription = "Navigation menu",
+                    tint = tint
+                )
+            }
+        }
+    }
+    DisposableEffect(Unit) {
+        val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
+            if (destination.route == AppScreen.Welcome.route) {
+                currentRoute = "Welcome"
+            }
+        }
+        navController.addOnDestinationChangedListener(listener)
+        onDispose {
+            navController.removeOnDestinationChangedListener(listener)
+        }
+    }
+
     TopAppBar(
-        title = { Text(currentRoute) },
+        title = { Text(currentRoute, color = tint)},
         navigationIcon = {
             IconButton(onClick = {
                 if (showBack) {
@@ -67,8 +100,7 @@ fun DefaultInsideTopBar (navController: NavHostController,
                 onDismissRequest = { expanded = false }
             ) {
                 DropdownMenuItem(
-                    text = { Text("Welcome",
-                        color = tint) },
+                    text = { Text("Welcome") },
                     onClick = {
                         navController.navigate(route = AppScreen.Welcome.route)
                         currentRoute = "Welcome"
@@ -81,8 +113,7 @@ fun DefaultInsideTopBar (navController: NavHostController,
                         )
                     })
                 DropdownMenuItem(
-                    text = { Text("Courses",
-                        color = tint) },
+                    text = { Text("Courses") },
                     onClick = {
                         navController.navigate(route = AppScreen.Courses.route)
                         currentRoute = "Courses"
@@ -95,8 +126,7 @@ fun DefaultInsideTopBar (navController: NavHostController,
                         )
                     })
                 DropdownMenuItem(
-                    text = { Text("Profile",
-                        color = tint) },
+                    text = { Text("Profile") },
                     onClick = {
                         navController.navigate(route = AppScreen.Profile.route)
                         currentRoute = "Profile"
@@ -110,8 +140,7 @@ fun DefaultInsideTopBar (navController: NavHostController,
                     })
                 Divider()
                 DropdownMenuItem(
-                    text = { Text("Logout",
-                        color = tint) },
+                    text = { Text("Logout")},
                     onClick = {
                         navController.navigate(route = AppScreen.Login.route)
                         currentRoute = "Logout"
@@ -126,7 +155,6 @@ fun DefaultInsideTopBar (navController: NavHostController,
             }
         }
     )
-
 }
 
 

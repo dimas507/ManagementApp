@@ -1,4 +1,4 @@
-package com.mccm.managementapp.presentation.views.signup
+package com.mccm.managementapp.presentation.views.profile_edit
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -7,25 +7,24 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.mccm.managementapp.presentation.components.DefaultTopBar
 import com.mccm.managementapp.presentation.ui.theme.Orange2
-import com.mccm.managementapp.presentation.views.signup.components.SignUP
+import com.mccm.managementapp.presentation.views.profile_edit.components.ProfileEditContent
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpView(navController: NavHostController){
+fun ProfileEditView(navController: NavHostController){
     Scaffold(
         topBar = {
-                 DefaultTopBar(
-                     title = "New User",
-                     upAvailable = true,
-                     navController = navController,
-                     color = Orange2
-                 )
+            DefaultTopBar(
+                title = "Edit User",
+                upAvailable = true,
+                navController = navController,
+                color = Orange2
+            )
         },
         content = {
-                  SignupContent(navController)
+            ProfileEditContent(navController)
         },
         bottomBar = {}
     )
-    SignUP(navController = navController)
 }

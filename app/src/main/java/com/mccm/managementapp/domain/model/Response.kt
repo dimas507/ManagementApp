@@ -2,7 +2,6 @@ package com.mccm.managementapp.domain.model
 
 import java.lang.Exception
 
-
 //Firebase control response
 sealed class Response<out T>
 {

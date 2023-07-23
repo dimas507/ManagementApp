@@ -2,7 +2,9 @@ package com.mccm.managementapp.presentation.views.signup
 
 import android.util.Patterns
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
@@ -17,59 +19,73 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases, private val usersUseCases: UsersUseCases)  : ViewModel() {
+class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases,
+                                          private val usersUseCases: UsersUseCases)
+    :ViewModel() {
+    //State Form
+    var state by mutableStateOf(SignupState())
+        private set
 
     //Username
-    var name:MutableState<String> = mutableStateOf("")
-    var isnameValid: MutableState<Boolean> = mutableStateOf(false)
-    var nameErrMsg: MutableState<String> = mutableStateOf("")
+    var isnameValid by mutableStateOf(false)
+        private set
+    var nameErrMsg by mutableStateOf("")
+        private set
 
-    var lastname:MutableState<String> = mutableStateOf("")
-    var islastnameValid: MutableState<Boolean> = mutableStateOf(false)
-    var lastnameErrMsg: MutableState<String> = mutableStateOf("")
+    var islastnameValid by mutableStateOf(false)
+        private set
+    var lastnameErrMsg by mutableStateOf("")
+        private set
 
     //Confirm Password
-    var confirmPassword: MutableState<String> = mutableStateOf("")
-    var isconfirmPassword: MutableState<Boolean> = mutableStateOf(false)
-    var confirmPasswordErrMsg: MutableState<String> = mutableStateOf("")
+    var isconfirmPassword by mutableStateOf(false)
+        private set
+    var confirmPasswordErrMsg by mutableStateOf("")
+        private set
 
     //Email
-    var email: MutableState<String> = mutableStateOf("")
-    var isEmailValid: MutableState<Boolean> = mutableStateOf(false)
-    var emailErrMsg: MutableState<String> = mutableStateOf("")
+    var isEmailValid by mutableStateOf(false)
+        private set
+    var emailErrMsg by mutableStateOf("")
+        private set
 
     //Password
-    var password: MutableState<String> = mutableStateOf("")
-    var isPasswordValid: MutableState<Boolean> = mutableStateOf(false)
-    var passwordlErrMsg: MutableState<String> = mutableStateOf("")
+    var isPasswordValid by mutableStateOf(false)
+        private set
+    var passwordlErrMsg by mutableStateOf("")
+        private set
 
     //NIF
-    var nif: MutableState<String> = mutableStateOf("")
-    var isnifValid: MutableState<Boolean> = mutableStateOf(false)
-    var nifErrMsg: MutableState<String> = mutableStateOf("")
+    var isnifValid by mutableStateOf(false)
+        private set
+    var nifErrMsg by mutableStateOf("")
+        private set
 
     //Address
-    var address: MutableState<String> = mutableStateOf("")
-    var isaddressValid: MutableState<Boolean> = mutableStateOf(false)
-    var addressErrMsg: MutableState<String> = mutableStateOf("")
+    var isaddressValid by mutableStateOf(false)
+        private set
+    var addressErrMsg by mutableStateOf("")
+        private set
 
     //Birthday
-    var birthday: MutableState<String> = mutableStateOf("")
 
     //Access type
-    var accessType: MutableState<String> = mutableStateOf("")
-    var isaccessTypeValid: MutableState<Boolean> = mutableStateOf(false)
-    var accessTypeErrMsg: MutableState<String> = mutableStateOf("")
+    var isaccessTypeValid by mutableStateOf(false)
+        private set
+    var accessTypeErrMsg by mutableStateOf("")
+        private set
 
     //Gender
-    var gender: MutableState<String> = mutableStateOf("")
-    var isgenderValid: MutableState<Boolean> = mutableStateOf(false)
-    var genderErrMsg: MutableState<String> = mutableStateOf("")
+    var isgenderValid by mutableStateOf(false)
+        private set
+    var genderErrMsg by mutableStateOf("")
+        private set
 
     //School name
-    var schoolName: MutableState<String> = mutableStateOf("")
-    var isschoolNameValid: MutableState<Boolean> = mutableStateOf(false)
-    var schoolNameErrMsg: MutableState<String> = mutableStateOf("")
+    var isschoolNameValid by mutableStateOf(false)
+        private set
+    var schoolNameErrMsg by mutableStateOf("")
+        private set
 
     //Button
     var isEnableSignupButton = false
@@ -82,142 +98,175 @@ class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases
 
     fun ValidateName(){
 
-        if (name.value.length >=3 && isValidString(name.value)){
-            isnameValid.value = true
-            nameErrMsg.value = ""
+        if (state.name.length >=3 && isValidString(state.name)){
+            isnameValid = true
+            nameErrMsg = ""
         }
         else{
-            isnameValid.value = false
-            nameErrMsg.value = "You must enter at least 3 characters in the name and only use letters"
+            isnameValid = false
+            nameErrMsg = "You must enter at least 3 characters in the name and only use letters"
         }
         enableSignUpButton()
     }
     fun ValidateLastname(){
 
-        if (lastname.value.length >=3 && isValidString(lastname.value)){
-            islastnameValid.value = true
-            lastnameErrMsg.value = ""
+        if (state.lastname.length >=3 && isValidString(state.lastname)){
+            islastnameValid = true
+            lastnameErrMsg = ""
         }
         else{
-            islastnameValid.value = false
-            lastnameErrMsg.value = "You must enter at least 3 characters in the lastname and only use letters"
+            islastnameValid = false
+            lastnameErrMsg = "You must enter at least 3 characters in the lastname and only use letters"
         }
         enableSignUpButton()
     }
 
     fun ValidateNIF(){
 
-        if (nif.value.length >=4){
-            isnifValid.value = true
-            nifErrMsg.value = ""
+        if (state.nif.length >=4){
+            isnifValid = true
+            nifErrMsg = ""
         }
         else{
-            isnifValid.value = false
-            nifErrMsg.value = "You must enter at least 4 characters in the NIF"
+            isnifValid = false
+            nifErrMsg = "You must enter at least 4 characters in the NIF"
         }
         enableSignUpButton()
     }
     fun ValidateAccessType(){
 
-        if (accessType.value.length >=4){
-            isaccessTypeValid.value = true
-            accessTypeErrMsg.value = ""
+        if (state.accessType.length >=4){
+            isaccessTypeValid = true
+            accessTypeErrMsg = ""
         }
         else{
-            isaccessTypeValid.value = false
-            accessTypeErrMsg.value = "You must enter at least 4 characters in the access type"
+            isaccessTypeValid = false
+            accessTypeErrMsg = "You must enter at least 4 characters in the access type"
         }
         enableSignUpButton()
     }
     fun ValidateAddress(){
 
-        if (address.value.length >=5){
-            isaddressValid.value = true
-            addressErrMsg.value = ""
+        if (state.address.length >=5){
+            isaddressValid = true
+            addressErrMsg = ""
         }
         else{
-            isaddressValid.value = false
-            addressErrMsg.value = "You must enter at least 5 characters in the addess"
+            isaddressValid = false
+            addressErrMsg = "You must enter at least 5 characters in the addess"
         }
         enableSignUpButton()
     }
     fun ValidateGender(){
 
-        if (gender.value.length >=1){
-            isgenderValid.value = true
-            genderErrMsg.value = ""
+        if (state.gender.length >=1){
+            isgenderValid = true
+            genderErrMsg = ""
         }
         else{
-            isgenderValid.value = false
-            genderErrMsg.value = "You must enter at least 1 characters in the gender"
+            isgenderValid = false
+            genderErrMsg = "You must enter at least 1 characters in the gender"
         }
         enableSignUpButton()
     }
     fun ValidateSchoolName(){
 
-        if (schoolName.value.length >=3){
-            isschoolNameValid.value = true
-            schoolNameErrMsg.value = ""
+        if (state.schoolName.length >=3){
+            isschoolNameValid = true
+            schoolNameErrMsg = ""
         }
         else{
-            isschoolNameValid.value = false
-            schoolNameErrMsg.value = "You must enter at least 4 characters in the school name"
+            isschoolNameValid = false
+            schoolNameErrMsg = "You must enter at least 4 characters in the school name"
         }
         enableSignUpButton()
     }
-
     fun validateEmail(){
-        if(Patterns.EMAIL_ADDRESS.matcher(email.value).matches()) {
-            isEmailValid.value = true
-            emailErrMsg.value = ""
+        if(Patterns.EMAIL_ADDRESS.matcher(state.email).matches()) {
+            isEmailValid = true
+            emailErrMsg = ""
         }
         else {
-            isEmailValid.value = false
-            emailErrMsg.value = "Email not valid "
+            isEmailValid = false
+            emailErrMsg = "Email not valid "
         }
         enableSignUpButton()
     }
 
     fun validatePassword(){
-        if(password.value.length >= 6){
-            isPasswordValid.value = true
-            passwordlErrMsg.value = ""
+        if(state.password.length >= 6){
+            isPasswordValid = true
+            passwordlErrMsg = ""
         }
         else {
-            passwordlErrMsg.value = "You must enter at least 6 characters"
+            passwordlErrMsg = "You must enter at least 6 characters"
 
         }
         enableSignUpButton()
     }
 
     fun ValidateConfirmPassword(){
-        if (password.value == confirmPassword.value){
-            isconfirmPassword.value = true
-            confirmPasswordErrMsg.value = ""
+        if (state.password == state.confirmPassword){
+            isconfirmPassword = true
+            confirmPasswordErrMsg = ""
         }
         else{
-            isconfirmPassword.value = false
-            confirmPasswordErrMsg.value = "Passwords don't match"
+            isconfirmPassword = false
+            confirmPasswordErrMsg = "Passwords don't match"
         }
         enableSignUpButton()
     }
 
-    private val _signupFlow = MutableStateFlow<Response<FirebaseUser>?>(null)
-    val signuoFlow: StateFlow<Response<FirebaseUser>?> = _signupFlow
+    var signUpResponse by mutableStateOf<Response<FirebaseUser>?>(null)
+        private set
 
     var user = User()
+
+    fun onNameInput(name: String){
+        state = state.copy(name = name)
+    }
+    fun onLastnameInput(lastname: String){
+        state = state.copy(lastname = lastname)
+    }
+    fun onNifInput(nif: String){
+        state = state.copy(nif = nif)
+    }fun onAddressInput(address: String){
+        state = state.copy(address = address)
+    }
+    fun onBirthdayInput(birthday: String){
+        state = state.copy(birthday = birthday)
+    }
+    fun onAccesTypeInput(accesType: String){
+        state = state.copy(accessType = accesType)
+    }
+    fun onGenderInput(gender: String){
+        state = state.copy(gender = gender)
+    }
+    fun onSchoolNameInput(schoolName: String){
+        state = state.copy(schoolName = schoolName)
+    }
+    fun onEmailInput(email: String){
+        state = state.copy(email = email)
+    }
+    fun onPasswordInput(password: String){
+        state = state.copy(password = password)
+    }
+    fun onConfirmPasswordInput(confirmPassword: String){
+        state = state.copy(confirmPassword = confirmPassword)
+    }
+
     fun onSignUp(){
-        user.name = name.value
-        user.lastname = lastname.value
-        user.nif = nif.value
-        user.address = address.value
-        user.birthday = birthday.value
-        user.accesType = accessType.value
-        user.gender = gender.value
-        user.schoolName = schoolName.value
-        user.email = email.value
-        user.password = password.value
-        user.username = "${name.value} ${lastname.value}"
+        user.name = state.name
+        user.lastname = state.lastname
+        user.nif = state.nif
+        user.address = state.address
+        user.birthday = state.birthday
+        user.accesType = state.accessType
+        user.gender = state.gender
+        user.schoolName = state.schoolName
+        user.email = state.email
+        user.password = state.password
+        user.username = "${state.name} ${state.lastname}"
 
         signup(user)
     }
@@ -226,20 +275,20 @@ class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases
         usersUseCases.create(user)
     }
     fun signup(user: User) = viewModelScope.launch {
-        _signupFlow.value = Response.Loading
+        signUpResponse = Response.Loading
         val result = authUseCases.signup(user)
-        _signupFlow.value = result
+        signUpResponse = result
     }
     fun enableSignUpButton(){
-        isEnableSignupButton = isEmailValid.value == true &&
-                isPasswordValid.value == true &&
-                isconfirmPassword.value == true &&
-                isnameValid.value == true &&
-                islastnameValid.value == true &&
-                isnifValid.value == true &&
-                isaddressValid.value == true &&
-                isaccessTypeValid.value == true &&
-                isgenderValid.value == true &&
-                isschoolNameValid.value == true
+        isEnableSignupButton = isEmailValid == true &&
+                isPasswordValid == true &&
+                isconfirmPassword == true &&
+                isnameValid == true &&
+                islastnameValid == true &&
+                isnifValid == true &&
+                isaddressValid == true &&
+                isaccessTypeValid == true &&
+                isgenderValid == true &&
+                isschoolNameValid == true
     }
 }
