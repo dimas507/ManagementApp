@@ -46,6 +46,9 @@ import com.mccm.managementapp.presentation.views.login.LoginViewModel
 
 @Composable
 fun LoginContent (navController:NavHostController, viewModel: LoginViewModel = hiltViewModel()){
+
+    val state = viewModel.state
+
     Box(modifier = Modifier
         .fillMaxWidth()) {
         Box(
@@ -73,7 +76,6 @@ fun LoginContent (navController:NavHostController, viewModel: LoginViewModel = h
             }
         }
 
-        val loginFlow = viewModel.loginflow.collectAsState()
         Card(
             modifier = Modifier
                 .padding(start = 40.dp, end = 40.dp, top = 250.dp)
@@ -95,24 +97,24 @@ fun LoginContent (navController:NavHostController, viewModel: LoginViewModel = h
                 )
                 DefaultOutlinedTextField(
                     modifier = Modifier.padding(15.dp),
-                    value = viewModel.email.value,
-                    onValueChange = { viewModel.email.value = it },
+                    value = state.email,
+                    onValueChange = { viewModel.onEmailInput(it) },
                     label = "Email",
                     icon = Icons.Default.Person,
                     keyboardType = KeyboardType.Email,
-                    errorMsg = viewModel.emailErrMsg.value,
+                    errorMsg = viewModel.emailErrMsg,
                     validateField = {
                         viewModel.validateEmail()
                     }
                 )
                 DefaultOutlinedTextField(
                     modifier = Modifier.padding(15.dp),
-                    value = viewModel.password.value,
-                    onValueChange = { viewModel.password.value = it},
+                    value = state.password,
+                    onValueChange = { viewModel.onPasswordInput(it) },
                     label = "Password",
                     icon = Icons.Default.Lock,
                     hideText = true,
-                    errorMsg = viewModel.passwordlErrMsg.value,
+                    errorMsg = viewModel.passwordlErrMsg,
                     validateField = {
                         viewModel.validatePassword()
                     }
@@ -130,33 +132,7 @@ fun LoginContent (navController:NavHostController, viewModel: LoginViewModel = h
                 )
             }
         }
-        loginFlow.value.let {
-            when(it){
-                Response.Loading -> {
-                    Box(contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ){
-                        CircularProgressIndicator()
-                    }
-                }
-                is Response.Success -> {
-                    LaunchedEffect(Unit) {
-                        navController.popBackStack(AppScreen.Login.route, true)
-                        navController.navigate(route = AppScreen.Welcome.route)
-                    }
-                    Toast.makeText(LocalContext.current,
-                        "Loggin",
-                        Toast.LENGTH_LONG).show()
-                }
-                is Response.Failure ->{
-                    Toast.makeText(LocalContext.current,
-                        it.exception?.message ?:"Error desconocido",
-                        Toast.LENGTH_LONG).show()
-                }
 
-                else -> {}
-            }
-        }
     }
 }
 

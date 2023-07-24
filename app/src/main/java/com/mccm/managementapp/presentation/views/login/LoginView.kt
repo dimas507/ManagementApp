@@ -8,6 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mccm.managementapp.presentation.ui.theme.ManagementAppTheme
+import com.mccm.managementapp.presentation.views.login.components.Login
 import com.mccm.managementapp.presentation.views.login.components.LoginBottonBar
 import com.mccm.managementapp.presentation.views.login.components.LoginContent
 
@@ -21,6 +22,8 @@ fun LoginView(navController: NavHostController) {
         content = { LoginContent(navController) },
         bottomBar = { LoginBottonBar(navController) }
     )
+    //Manage the status of login request
+    Login(navController = navController)
 }
 
 @Preview(showBackground = true, showSystemUi = true)

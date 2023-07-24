@@ -1,7 +1,6 @@
 package com.mccm.managementapp.presentation.views.signup
 
 import android.util.Patterns
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -13,8 +12,6 @@ import com.mccm.managementapp.domain.model.User
 import com.mccm.managementapp.domain.use_cases.auth.AuthUseCases
 import com.mccm.managementapp.domain.use_cases.users.UsersUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -217,6 +214,7 @@ class SignUpViewModel @Inject constructor(private val authUseCases: AuthUseCases
         enableSignUpButton()
     }
 
+    //SignUp Response
     var signUpResponse by mutableStateOf<Response<FirebaseUser>?>(null)
         private set
 

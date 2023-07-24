@@ -96,49 +96,6 @@ fun CardForm(viewModel: ProfileEditViewModel = hiltViewModel()){
             )
             DefaultOutlinedTextField(
                 modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = state.name,
-                onValueChange = { viewModel.onNameInput(it) },
-                label = "Name",
-                icon = Icons.Default.Person,
-                validateField = {viewModel.ValidateName()},
-                errorMsg = viewModel.nameErrMsg
-            )
-            DefaultOutlinedTextField(
-                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = state.lastname,
-                onValueChange = { viewModel.onLastnameInput(it) },
-                label = "Lastname",
-                icon = Icons.Outlined.Person,
-                validateField = {viewModel.ValidateLastname()},
-                errorMsg = viewModel.lastnameErrMsg
-            )
-            DefaultOutlinedTextField(
-                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = state.nif,
-                onValueChange = { viewModel.onNifInput(it) },
-                label = "NIF",
-                painter = painterResource(id = R.drawable.pin),
-                validateField = {viewModel.ValidateNIF()},
-                errorMsg = viewModel.nifErrMsg
-            )
-            DefaultOutlinedTextField(
-                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = state.address,
-                onValueChange = { viewModel.onAddressInput(it)},
-                label = "Address",
-                painter = painterResource(id = R.drawable.my_location),
-                validateField = {viewModel.ValidateAddress()},
-                errorMsg = viewModel.addressErrMsg
-            )
-            DefaultOutlinedTextField(
-                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
-                value = state.birthday,
-                onValueChange = { viewModel.onBirthdayInput(it)},
-                label = "Birthday",
-                painter = painterResource(id = R.drawable.calendar_month)
-            )
-            DefaultOutlinedTextField(
-                modifier = Modifier.padding(start = 30.dp, top = 10.dp),
                 value = state.schoolName,
                 onValueChange = { viewModel.onSchoolNameInput(it) },
                 label = "School name",

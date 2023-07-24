@@ -8,5 +8,5 @@ sealed class AppScreen (val route: String){
     object Welcome: AppScreen("welcome")
     object Profile:AppScreen("perfil")
     object Courses:AppScreen("courses")
-    object ProfileEdit: AppScreen("profileEdit")
+    object ProfileEdit: AppScreen("profile/edit")
 }
