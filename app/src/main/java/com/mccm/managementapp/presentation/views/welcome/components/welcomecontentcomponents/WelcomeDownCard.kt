@@ -143,7 +143,6 @@ fun WelcomeDownCard(navController: NavHostController) {
                     }
                 }
             }
-            Spacer(modifier = Modifier.padding(start = 20.dp))
             Card(modifier = Modifier
                 .padding(start = 10.dp, end = 10.dp)
                 .shadow(10.dp),
