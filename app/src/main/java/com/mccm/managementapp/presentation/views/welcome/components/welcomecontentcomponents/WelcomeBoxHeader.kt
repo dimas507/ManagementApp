@@ -1,6 +1,7 @@
 package com.mccm.managementapp.presentation.views.welcome.components.welcomecontentcomponents
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
+import com.mccm.managementapp.presentation.navigation.AppScreen
 import com.mccm.managementapp.presentation.ui.theme.Gray500
 import com.mccm.managementapp.presentation.ui.theme.Indigo900
 import com.mccm.managementapp.presentation.views.welcome.WelcomeViewModel
@@ -33,6 +35,7 @@ fun WelcomeBoxHeader(navController: NavHostController,
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .clickable { navController.navigate(route = AppScreen.Profile.route) }
                 .padding(20.dp),
             verticalAlignment = Alignment.CenterVertically) {
             Image(
