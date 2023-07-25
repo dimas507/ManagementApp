@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.components.DefaultButton
 import com.mccm.managementapp.presentation.ui.theme.Blue900
@@ -37,7 +38,7 @@ import com.mccm.managementapp.presentation.ui.theme.ManagementAppTheme
 import com.mccm.managementapp.presentation.ui.theme.White
 
 @Composable
-fun WelcomeCard(){
+fun WelcomeCard(navController: NavHostController){
     Spacer(modifier = Modifier.width(20.dp))
     Card(modifier = Modifier
         .padding(start = 30.dp, end = 30.dp)
@@ -100,10 +101,3 @@ fun WelcomeCard(){
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewWelcomeCard() {
-    ManagementAppTheme {
-        WelcomeCard()
-    }
-}

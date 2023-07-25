@@ -19,8 +19,8 @@ fun WelcomeContent(navController: NavHostController) {
     {
         Column {
             WelcomeBoxHeader(navController)
-            WelcomeCard()
-            WelcomeDownCard()
+            WelcomeCard(navController)
+            WelcomeDownCard(navController)
         }
     }
 }

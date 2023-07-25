@@ -83,6 +83,7 @@ fun ProfileContent (navController: NavHostController,
             modifier = Modifier.width(200.dp),
             color = Green900
         )
+        
         Spacer(modifier = Modifier.height(15.dp))
         DefaultButton(
             text = "Logout",

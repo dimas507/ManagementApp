@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.mccm.managementapp.presentation.views.animalscourses.AnimalsCoursesView
 import com.mccm.managementapp.presentation.views.courses.CoursesView
 import com.mccm.managementapp.presentation.views.login.LoginView
 import com.mccm.managementapp.presentation.views.profile.ProfileView
@@ -40,6 +41,9 @@ fun AppNavigation(navController: NavHostController){
 
         composable(route = AppScreen.ProfileEdit.route){
             ProfileEditView(navController)
+        }
+        composable(route = AppScreen.AnimalsCourses.route){
+            AnimalsCoursesView(navController)
         }
     }
 }

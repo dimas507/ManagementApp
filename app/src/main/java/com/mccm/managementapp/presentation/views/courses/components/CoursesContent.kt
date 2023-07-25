@@ -33,6 +33,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.components.DefaultButton
+import com.mccm.managementapp.presentation.navigation.AppScreen
 import com.mccm.managementapp.presentation.ui.theme.Indigo900
 
 
@@ -80,7 +81,7 @@ fun CoursesContent(navController: NavHostController) {
                 border = BorderStroke(4.dp, Color.White),
                 colors = CardDefaults.cardColors(Color.White),
                 elevation = CardDefaults.cardElevation(10.dp),
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(route = AppScreen.AnimalsCourses.route) }
             ){
                     Column(modifier = Modifier.padding(30.dp)) {
                         Box(modifier = Modifier.padding(10.dp)){

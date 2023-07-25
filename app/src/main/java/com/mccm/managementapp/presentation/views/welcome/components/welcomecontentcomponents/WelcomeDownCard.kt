@@ -28,8 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.components.DefaultButton
+import com.mccm.managementapp.presentation.navigation.AppScreen
 import com.mccm.managementapp.presentation.ui.theme.Blue400
 import com.mccm.managementapp.presentation.ui.theme.Green400
 import com.mccm.managementapp.presentation.ui.theme.ManagementAppTheme
@@ -37,7 +39,7 @@ import com.mccm.managementapp.presentation.ui.theme.Orange400
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WelcomeDownCard() {
+fun WelcomeDownCard(navController: NavHostController) {
     Spacer(modifier = Modifier
         .padding(top = 20.dp))
     Column(modifier = Modifier
@@ -152,7 +154,7 @@ fun WelcomeDownCard() {
         }
 
         DefaultButton(text = "All courses"
-            , onClick = { /*TODO*/ }
+            , onClick = {navController.navigate(route = AppScreen.Courses.route) }
             , modifier = Modifier
                 .padding(top = 30.dp, start = 20.dp ,end = 20.dp)
             .size(width = 300.dp, height = 40.dp))
@@ -202,10 +204,3 @@ fun WelcomeDownCard() {
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun PreviewWelcomeDownCard() {
-    ManagementAppTheme {
-        WelcomeDownCard()
-    }
-}
