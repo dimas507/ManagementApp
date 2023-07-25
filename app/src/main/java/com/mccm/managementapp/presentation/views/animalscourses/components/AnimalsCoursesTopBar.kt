@@ -7,5 +7,5 @@ import com.mccm.managementapp.presentation.components.DefaultInsideTopBar
 
 @Composable
 fun AnimalsCoursesTopBar(navController: NavHostController) {
-    DefaultInsideTopBar(navController, showBack = true ,colorBackground = Color.White)
+    DefaultInsideTopBar(navController, colorBackground = Color.White)
 }

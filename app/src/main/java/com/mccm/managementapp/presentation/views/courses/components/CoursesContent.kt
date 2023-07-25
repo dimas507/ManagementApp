@@ -201,13 +201,13 @@ fun CoursesContent(navController: NavHostController) {
                                 .zIndex(1f)
                                 .wrapContentWidth(Alignment.End),
                             painter = painterResource(id = R.drawable.foods_log_img),
-                            contentDescription = "Animal Log")
+                            contentDescription = "Food Log")
                     }
                     Text(modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .padding(start = 10.dp, end = 10.dp)
                         .wrapContentWidth(Alignment.CenterHorizontally),
-                        text = "Animal",
+                        text = "Food",
                         color = Color.Black,
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,

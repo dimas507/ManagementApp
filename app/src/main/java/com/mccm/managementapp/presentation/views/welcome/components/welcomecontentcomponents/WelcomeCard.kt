@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
@@ -32,9 +31,9 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.components.DefaultButton
+import com.mccm.managementapp.presentation.navigation.AppScreen
 import com.mccm.managementapp.presentation.ui.theme.Blue900
 import com.mccm.managementapp.presentation.ui.theme.Indigo900
-import com.mccm.managementapp.presentation.ui.theme.ManagementAppTheme
 import com.mccm.managementapp.presentation.ui.theme.White
 
 @Composable
@@ -52,7 +51,7 @@ fun WelcomeCard(navController: NavHostController){
             .padding(15.dp)
             .background(color = White)) {
             Spacer(modifier = Modifier.padding(top = 15.dp))
-            DefaultButton(text = "Begginer", onClick = { /*TODO*/ }, modifier = Modifier
+            DefaultButton(text = "Begginer", onClick = { navController.navigate(route = AppScreen.Courses.route) }, modifier = Modifier
                 .size(width = 140.dp, height = 40.dp))
             Row {
                 Column(modifier = Modifier

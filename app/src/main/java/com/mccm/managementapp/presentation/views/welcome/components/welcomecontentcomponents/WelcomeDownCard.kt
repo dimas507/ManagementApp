@@ -3,6 +3,7 @@ package com.mccm.managementapp.presentation.views.welcome.components.welcomecont
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,17 +25,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.components.DefaultButton
 import com.mccm.managementapp.presentation.navigation.AppScreen
 import com.mccm.managementapp.presentation.ui.theme.Blue400
 import com.mccm.managementapp.presentation.ui.theme.Green400
-import com.mccm.managementapp.presentation.ui.theme.ManagementAppTheme
 import com.mccm.managementapp.presentation.ui.theme.Orange400
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,7 +62,7 @@ fun WelcomeDownCard(navController: NavHostController) {
                 border = BorderStroke(4.dp, Orange400),
                 colors = CardDefaults.cardColors(Orange400),
                 elevation = CardDefaults.cardElevation(7.dp),
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(route = AppScreen.AnimalsCourses.route) }
             ){
                     Row() {
                         Column() {
@@ -81,10 +81,22 @@ fun WelcomeDownCard(navController: NavHostController) {
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold)
                         }
-                        Image(
-                            modifier = Modifier.wrapContentWidth(Alignment.End) ,
-                            painter = painterResource( R.drawable.white_circle)
-                            ,contentDescription = "")
+                        Box(modifier = Modifier.padding(10.dp)){
+                            Image(
+                                modifier = Modifier
+                                    .align(Alignment.Center)
+                                    .zIndex(0f)
+                                    .wrapContentWidth(Alignment.End),
+                                painter = painterResource(id = R.drawable.white_circle),
+                                contentDescription = "Withe Circle")
+                            Image(
+                                modifier = Modifier
+                                    .align(Alignment.Center)
+                                    .zIndex(1f)
+                                    .wrapContentWidth(Alignment.End),
+                                painter = painterResource(id = R.drawable.animal_log_img),
+                                contentDescription = "Animal Log")
+                        }
                     }
             }
             //Eliminar los siguientes y hacer interactivo
@@ -113,10 +125,22 @@ fun WelcomeDownCard(navController: NavHostController) {
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold)
                     }
-                    Image(
-                        modifier = Modifier.wrapContentWidth(Alignment.End) ,
-                        painter = painterResource( R.drawable.white_circle)
-                        ,contentDescription = "")
+                    Box(modifier = Modifier.padding(10.dp)){
+                        Image(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .zIndex(0f)
+                                .wrapContentWidth(Alignment.End),
+                            painter = painterResource(id = R.drawable.white_circle),
+                            contentDescription = "Withe Circle")
+                        Image(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .zIndex(1f)
+                                .wrapContentWidth(Alignment.End),
+                            painter = painterResource(id = R.drawable.foods_log_img),
+                            contentDescription = "Food Log")
+                    }
                 }
             }
             Spacer(modifier = Modifier.padding(start = 20.dp))
@@ -145,10 +169,22 @@ fun WelcomeDownCard(navController: NavHostController) {
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold)
                     }
-                    Image(
-                        modifier = Modifier.wrapContentWidth(Alignment.End) ,
-                        painter = painterResource( R.drawable.white_circle)
-                        ,contentDescription = "")
+                    Box(modifier = Modifier.padding(10.dp)){
+                        Image(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .zIndex(0f)
+                                .wrapContentWidth(Alignment.End),
+                            painter = painterResource(id = R.drawable.white_circle),
+                            contentDescription = "Withe Circle")
+                        Image(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .zIndex(1f)
+                                .wrapContentWidth(Alignment.End),
+                            painter = painterResource(id = R.drawable.plants_img),
+                            contentDescription = "Plants Log")
+                    }
                 }
             }
         }

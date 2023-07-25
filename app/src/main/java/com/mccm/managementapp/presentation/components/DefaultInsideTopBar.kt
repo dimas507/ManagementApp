@@ -59,6 +59,7 @@ fun DefaultInsideTopBar(
     tint: Color = Color.Black
 ) {
     var expanded by remember { mutableStateOf(false) }
+    var coursesExpanded by remember { mutableStateOf(false) }
     var currentRoute by rememberSaveable { mutableStateOf("") }
     DisposableEffect(Unit) {
         val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
@@ -66,7 +67,7 @@ fun DefaultInsideTopBar(
                 AppScreen.Welcome.route -> "Welcome"
                 AppScreen.Courses.route -> "Courses"
                 AppScreen.Profile.route -> "Profile"
-                AppScreen.Profile.route -> "Animals Courses"
+                AppScreen.AnimalsCourses.route -> "Animals Courses"
                 else -> ""
             }
         }
@@ -136,11 +137,20 @@ fun DefaultInsideTopBar(
                     icon = painterResource(id = R.drawable.library_books_),
                     isSelected = currentRoute == "Courses",
                     onClick = {
-                        navController.navigate(route = AppScreen.Courses.route)
-                        currentRoute = "Courses"
-                        expanded = false
+                        coursesExpanded = !coursesExpanded
                     }
                 )
+                if (coursesExpanded) {
+                    SubMenuItem(
+                        text = "Animals Courses",
+                        onClick = {
+                            navController.navigate(route = AppScreen.AnimalsCourses.route)
+                            currentRoute = "Animals Courses"
+                            expanded = false
+                            coursesExpanded = false
+                        }
+                    )
+                }
                 MenuItem(
                     text = "Profile",
                     icon = painterResource(id = R.drawable.account_circle_),
@@ -191,3 +201,26 @@ fun MenuItem(
     }
 }
 
+@Composable
+fun SubMenuItem(
+    text: String,
+    onClick: () -> Unit
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(
+                interactionSource = interactionSource,
+                indication = rememberRipple(bounded = false),
+                onClick = onClick
+            )
+            .padding(start = 32.dp, top = 16.dp, bottom = 16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text,
+            fontWeight = FontWeight.Bold,
+            style = TextStyle(color = Color.White))
+    }
+}
