@@ -21,6 +21,20 @@ class UsersRepositoryImpl @Inject constructor(private val usersRef: CollectionRe
             Response.Failure(e)
         }
     }
+
+    override suspend fun update(user: User): Response<Boolean> {
+        return try {
+            val map:MutableMap<String,Any> = HashMap()
+            map["schoolname"] = user.schoolName
+            map["image"] = user.image
+            usersRef.document(user.id).update(map).await()
+            Response.Success(true)
+        }catch (e: Exception){
+            e.printStackTrace()
+            Response.Failure(e)
+        }
+    }
+
     override fun getUserById(id: String): Flow<User> = callbackFlow {
         val snapshotListener = usersRef.document(id).addSnapshotListener{
             snapshot, e->

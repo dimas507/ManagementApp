@@ -2,8 +2,10 @@ package com.mccm.managementapp.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.mccm.managementapp.presentation.views.animalscourses.AnimalsCoursesView
 import com.mccm.managementapp.presentation.views.courses.CoursesView
 import com.mccm.managementapp.presentation.views.login.LoginView
@@ -39,9 +41,16 @@ fun AppNavigation(navController: NavHostController){
             CoursesView(navController)
         }
 
-        composable(route = AppScreen.ProfileEdit.route){
-            ProfileEditView(navController)
+        composable(
+            route = AppScreen.ProfileEdit.route,
+            arguments = listOf(navArgument("userId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId")
+            if (userId != null) {
+                ProfileEditView(navController, userId)
+            }
         }
+
         composable(route = AppScreen.AnimalsCourses.route){
             AnimalsCoursesView(navController)
         }

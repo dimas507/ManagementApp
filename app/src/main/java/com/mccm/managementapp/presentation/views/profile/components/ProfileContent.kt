@@ -117,7 +117,8 @@ fun ProfileContent (navController: NavHostController,
         Spacer(modifier = Modifier.height(30.dp))
         DefaultButton(
             text = "Edit data",
-            onClick = { navController.navigate(route = AppScreen.ProfileEdit.route) },
+            onClick = { navController.navigate(
+                route = AppScreen.ProfileEdit.passUser(viewModel.userData.id)) },
             modifier = Modifier.width(200.dp),
             color = Green900
         )
