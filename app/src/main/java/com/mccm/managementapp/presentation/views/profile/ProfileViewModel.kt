@@ -1,6 +1,5 @@
 package com.mccm.managementapp.presentation.views.profile
 
-import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -32,17 +31,4 @@ class ProfileViewModel @Inject constructor(private val authUseCases: AuthUseCase
     fun logout(){
         authUseCases.logout()
     }
-    //image
-    var imageUri by mutableStateOf<Uri?>(null)
-    var hasImage by mutableStateOf(false)
-
-    fun onResult(result: Boolean){
-        hasImage = result
-    }
-
-    fun onGalleryResult(uri: Uri){
-        hasImage = uri != null
-        imageUri = uri
-    }
-
 }

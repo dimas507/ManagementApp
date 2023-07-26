@@ -25,7 +25,9 @@ class UsersRepositoryImpl @Inject constructor(private val usersRef: CollectionRe
     override suspend fun update(user: User): Response<Boolean> {
         return try {
             val map:MutableMap<String,Any> = HashMap()
-            map["schoolname"] = user.schoolName
+            map["schoolName"] = user.schoolName
+            map["nif"] = user.nif
+            map["address"] = user.address
             map["image"] = user.image
             usersRef.document(user.id).update(map).await()
             Response.Success(true)

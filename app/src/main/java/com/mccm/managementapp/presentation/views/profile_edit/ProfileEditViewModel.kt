@@ -1,5 +1,6 @@
 package com.mccm.managementapp.presentation.views.profile_edit
 
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -33,11 +34,42 @@ class ProfileEditViewModel @Inject constructor(
     var updateResponse
     by mutableStateOf<Response<Boolean>>(Response.Success(false))
     private set
-
+    //NIF
+    var isnifValid by mutableStateOf(false)
+        private set
+    var nifErrMsg by mutableStateOf("")
+        private set
+    //Address
+    var isaddressValid by mutableStateOf(false)
+        private set
+    var addressErrMsg by mutableStateOf("")
+        private set
     init {
         val currentUser = authUseCases.getCurrentUser()
         if (currentUser != null) {
             getUserById(currentUser.uid)
+        }
+    }
+    fun ValidateNIF(){
+
+        if (state.nif.length >=4){
+            isnifValid = true
+            nifErrMsg = ""
+        }
+        else{
+            isnifValid = false
+            nifErrMsg = "You must enter at least 4 characters in the NIF"
+        }
+    }
+    fun ValidateAddress(){
+
+        if (state.address.length >=5){
+            isaddressValid = true
+            addressErrMsg = ""
+        }
+        else{
+            isaddressValid = false
+            addressErrMsg = "You must enter at least 5 characters in the addess"
         }
     }
     fun onUpdate(){
@@ -45,6 +77,8 @@ class ProfileEditViewModel @Inject constructor(
         val myUser = User(
             id= currentUser!!.uid,
             schoolName = state.schoolName,
+            address = state.address,
+            nif = state.nif,
             image = ""
         )
         update(myUser)
@@ -58,13 +92,13 @@ class ProfileEditViewModel @Inject constructor(
         usersUseCases.getUserById(userId).collect { user ->
             _user.emit(user)
             state = state.copy(schoolName = user.schoolName)
+            state = state.copy(nif = user.nif)
+            state = state.copy(address = user.address)
         }
     }
     fun onSchoolNameInput(schoolName: String){
         state = state.copy(schoolName = schoolName)
     }
-
-
     fun ValidateSchoolName(){
         if (state.schoolName.length >=3){
             schoolNameErrMsg = ""
@@ -72,5 +106,20 @@ class ProfileEditViewModel @Inject constructor(
         else{
             schoolNameErrMsg = "You must enter at least 4 characters in the school name"
         }
+    }
+    fun onNifInput(nif: String){
+        state = state.copy(nif = nif)}
+    fun onAddressInput(address: String){
+        state = state.copy(address = address)
+    }
+    //image
+    var imageUri by mutableStateOf<Uri?>(null)
+    var hasImage by mutableStateOf(false)
+    fun onResult(result: Boolean){
+        hasImage = result
+    }
+    fun onGalleryResult(uri: Uri){
+        hasImage = uri != null
+        imageUri = uri
     }
 }
