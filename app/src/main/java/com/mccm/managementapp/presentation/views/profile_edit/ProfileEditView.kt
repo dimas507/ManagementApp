@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import com.mccm.managementapp.presentation.components.DefaultTopBar
 import com.mccm.managementapp.presentation.ui.theme.Orange2
 import com.mccm.managementapp.presentation.views.profile_edit.components.ProfileEditContent
+import com.mccm.managementapp.presentation.views.profile_edit.components.Update
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,4 +32,5 @@ fun ProfileEditView(navController: NavHostController,
         },
         bottomBar = {}
     )
+    Update()
 }

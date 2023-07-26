@@ -106,7 +106,7 @@ fun CardForm(viewModel: ProfileEditViewModel = hiltViewModel()){
                     .fillMaxWidth()
                     .padding(35.dp),
                 text = "Update",
-                onClick = {},
+                onClick = {viewModel.onUpdate()},
                 color = Orange400
             )
         }

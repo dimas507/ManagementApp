@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mccm.managementapp.domain.model.Response
 import com.mccm.managementapp.domain.model.User
 import com.mccm.managementapp.domain.use_cases.auth.AuthUseCases
 import com.mccm.managementapp.domain.use_cases.users.UsersUseCases
@@ -20,19 +21,38 @@ class ProfileEditViewModel @Inject constructor(
     private val authUseCases: AuthUseCases,
 ) : ViewModel() {
 
+    var schoolNameErrMsg by mutableStateOf("")
+        private set
     //State Form
     var state by mutableStateOf(ProfileEditState())
         private set
-
     // User data
     private val _user = MutableStateFlow<User?>(null)
     val user: StateFlow<User?> = _user
+    //Response
+    var updateResponse
+    by mutableStateOf<Response<Boolean>>(Response.Success(false))
+    private set
 
     init {
         val currentUser = authUseCases.getCurrentUser()
         if (currentUser != null) {
             getUserById(currentUser.uid)
         }
+    }
+    fun onUpdate(){
+        val currentUser = authUseCases.getCurrentUser()
+        val myUser = User(
+            id= currentUser!!.uid,
+            schoolName = state.schoolName,
+            image = ""
+        )
+        update(myUser)
+    }
+    fun update(user: User) = viewModelScope.launch {
+        updateResponse = Response.Loading
+        val result = usersUseCases.update(user)
+        updateResponse = result
     }
     private fun getUserById(userId: String) = viewModelScope.launch {
         usersUseCases.getUserById(userId).collect { user ->
@@ -44,8 +64,6 @@ class ProfileEditViewModel @Inject constructor(
         state = state.copy(schoolName = schoolName)
     }
 
-    var schoolNameErrMsg by mutableStateOf("")
-        private set
 
     fun ValidateSchoolName(){
         if (state.schoolName.length >=3){
