@@ -21,6 +21,8 @@ fun AnimalsCoursesContent(viewModel: AnimalsCoursesViewModel = hiltViewModel()) 
             AnimalsCoursesHeader()
             DefaultHeaderContentView(text = "Animal course statistics")
             AnimalsCoursesBarraGraphic()
+            AnimalsCoursesPastelGraphic()
+            AnimalsCoursesLinearGraphic ()
         }
     }
 }

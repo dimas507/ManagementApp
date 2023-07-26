@@ -51,7 +51,8 @@ fun WelcomeCard(navController: NavHostController){
             .padding(15.dp)
             .background(color = White)) {
             Spacer(modifier = Modifier.padding(top = 15.dp))
-            DefaultButton(text = "Begginer", onClick = { navController.navigate(route = AppScreen.Courses.route) }, modifier = Modifier
+            DefaultButton(text = "Begginer", onClick = { navController
+                .navigate(route = AppScreen.Courses.route) }, modifier = Modifier
                 .size(width = 140.dp, height = 40.dp))
             Row {
                 Column(modifier = Modifier

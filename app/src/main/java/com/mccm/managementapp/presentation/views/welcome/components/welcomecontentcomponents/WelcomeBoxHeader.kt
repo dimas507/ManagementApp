@@ -65,5 +65,6 @@ fun WelcomeBoxHeader(navController: NavHostController,
             color = Indigo900,
             fontSize = 36.sp,
             fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.width(15.dp))
     }
 }
