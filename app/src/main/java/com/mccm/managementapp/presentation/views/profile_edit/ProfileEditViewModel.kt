@@ -44,4 +44,5 @@ class ProfileEditViewModel @Inject constructor(
             schoolNameErrMsg = "You must enter at least 4 characters in the school name"
         }
     }
+
 }

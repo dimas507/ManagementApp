@@ -13,9 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +34,6 @@ import com.mccm.managementapp.presentation.ui.theme.Orange2
 import com.mccm.managementapp.presentation.ui.theme.Orange400
 import com.mccm.managementapp.presentation.ui.theme.White
 import com.mccm.managementapp.presentation.views.profile_edit.ProfileEditViewModel
-import com.mccm.managementapp.presentation.views.signup.SignUpViewModel
 
 @Composable
 fun ProfileEditContent(navController: NavHostController) {
@@ -52,7 +48,8 @@ fun ProfileEditContent(navController: NavHostController) {
 
 }
 @Composable
-fun BoxHeader(){
+fun BoxHeader(viewModel: ProfileEditViewModel = hiltViewModel()){
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -75,6 +72,7 @@ fun BoxHeader(){
 @Composable
 fun CardForm(viewModel: ProfileEditViewModel = hiltViewModel()){
     val state = viewModel.state
+
     Card(
         modifier = Modifier
             .padding(start = 20.dp, end = 20.dp, top = 250.dp)
