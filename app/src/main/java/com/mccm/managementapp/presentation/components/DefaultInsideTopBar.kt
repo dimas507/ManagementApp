@@ -67,6 +67,7 @@ fun DefaultInsideTopBar(
                 AppScreen.Welcome.route -> "Welcome"
                 AppScreen.Courses.route -> "Courses"
                 AppScreen.Profile.route -> "Profile"
+                AppScreen.Annotations.route -> "Annotation"
                 AppScreen.AnimalsCourses.route -> "Animals Courses"
                 else -> ""
             }
@@ -158,6 +159,16 @@ fun DefaultInsideTopBar(
                     onClick = {
                         navController.navigate(route = AppScreen.Profile.route)
                         currentRoute = "Profile"
+                        expanded = false
+                    }
+                )
+                MenuItem(
+                    text = "Annotations",
+                    icon = painterResource(id = R.drawable.calendar),
+                    isSelected = currentRoute == "Annotations",
+                    onClick = {
+                        navController.navigate(route = AppScreen.Annotations.route)
+                        currentRoute = "Annotations"
                         expanded = false
                     }
                 )

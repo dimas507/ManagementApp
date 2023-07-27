@@ -6,7 +6,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.mccm.managementapp.presentation.new_annotations.NewPostView
 import com.mccm.managementapp.presentation.views.animalscourses.AnimalsCoursesView
+import com.mccm.managementapp.presentation.views.annotations.AnnotationsView
 import com.mccm.managementapp.presentation.views.courses.CoursesView
 import com.mccm.managementapp.presentation.views.login.LoginView
 import com.mccm.managementapp.presentation.views.profile.ProfileView
@@ -53,6 +55,12 @@ fun AppNavigation(navController: NavHostController){
 
         composable(route = AppScreen.AnimalsCourses.route){
             AnimalsCoursesView(navController)
+        }
+        composable(route = AppScreen.Annotations.route){
+            AnnotationsView(navController)
+        }
+        composable(route = AppScreen.NewPostView.route){
+            NewPostView(navController)
         }
     }
 }

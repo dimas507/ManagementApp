@@ -1,6 +1,9 @@
 package com.mccm.managementapp.data.repository
 
+import android.net.Uri
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.storage.StorageReference
+import com.mccm.managementapp.core.Constants.USERS
 import com.mccm.managementapp.domain.model.Response
 import com.mccm.managementapp.domain.model.User
 import com.mccm.managementapp.domain.repository.UsersRepository
@@ -8,9 +11,13 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
+import java.io.File
 import javax.inject.Inject
+import javax.inject.Named
 
-class UsersRepositoryImpl @Inject constructor(private val usersRef: CollectionReference):UsersRepository {
+class UsersRepositoryImpl @Inject constructor(
+    @Named(USERS) private val storageUsersRef: StorageReference,
+    @Named(USERS) private val usersRef: CollectionReference):UsersRepository {
     override suspend fun create(user: User): Response<Boolean> {
         return try {
             user.password = ""
@@ -32,6 +39,20 @@ class UsersRepositoryImpl @Inject constructor(private val usersRef: CollectionRe
             usersRef.document(user.id).update(map).await()
             Response.Success(true)
         }catch (e: Exception){
+            e.printStackTrace()
+            Response.Failure(e)
+        }
+    }
+
+    override suspend fun saveImage(file: File): Response<String>{
+        return try {
+            val fromFile = Uri.fromFile(file)
+            val ref = storageUsersRef.child(file.name)
+            val uploadTask = ref.putFile(fromFile).await()
+            val url = ref.downloadUrl.await()
+            return  Response.Success(url.toString())
+        }
+        catch (e: Exception){
             e.printStackTrace()
             Response.Failure(e)
         }

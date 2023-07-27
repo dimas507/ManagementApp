@@ -46,7 +46,8 @@ fun CoursesContent(navController: NavHostController) {
             modifier = Modifier
                 .wrapContentWidth(Alignment.End)
                 .align(Alignment.TopCenter)
-                .fillMaxWidth().size(350.dp),
+                .fillMaxWidth()
+                .size(350.dp),
             painter = painterResource( R.drawable.indigobluemidlecircle),
             contentDescription = "")
     }
@@ -63,8 +64,8 @@ fun CoursesContent(navController: NavHostController) {
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold
             )
-            DefaultButton(text = "Begginer",
-                onClick = { /*TODO*/ },
+            DefaultButton(text = "Anotations",
+                onClick = { navController.navigate(route = AppScreen.Annotations.route) },
                 modifier = Modifier,
                 color = Color.White,
                 tinticon = Indigo900,

@@ -13,4 +13,6 @@ sealed class AppScreen (val route: String){
 
     }
     object AnimalsCourses: AppScreen("animalscourses")
+    object Annotations: AppScreen("annotations")
+    object NewPostView: AppScreen("newannotations")
 }

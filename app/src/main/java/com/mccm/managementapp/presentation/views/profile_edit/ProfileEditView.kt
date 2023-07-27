@@ -7,6 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.mccm.managementapp.presentation.components.DefaultTopBar
+import com.mccm.managementapp.presentation.components.SaveImage
 import com.mccm.managementapp.presentation.ui.theme.Orange2
 import com.mccm.managementapp.presentation.views.profile_edit.components.ProfileEditContent
 import com.mccm.managementapp.presentation.views.profile_edit.components.Update
@@ -32,5 +33,6 @@ fun ProfileEditView(navController: NavHostController,
         },
         bottomBar = {}
     )
+    SaveImage()
     Update()
 }

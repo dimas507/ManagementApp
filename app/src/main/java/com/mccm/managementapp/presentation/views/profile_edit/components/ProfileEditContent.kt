@@ -1,7 +1,5 @@
 package com.mccm.managementapp.presentation.views.profile_edit.components
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,17 +12,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -36,11 +37,11 @@ import coil.compose.AsyncImage
 import com.mccm.managementapp.R
 import com.mccm.managementapp.presentation.components.DefaultButton
 import com.mccm.managementapp.presentation.components.DefaultOutlinedTextField
+import com.mccm.managementapp.presentation.components.DialogCapturePicture
 import com.mccm.managementapp.presentation.ui.theme.Blue900
 import com.mccm.managementapp.presentation.ui.theme.Orange2
 import com.mccm.managementapp.presentation.ui.theme.Orange400
 import com.mccm.managementapp.presentation.ui.theme.White
-import com.mccm.managementapp.presentation.utils.ComposeFileProvider
 import com.mccm.managementapp.presentation.views.profile.ProfileViewModel
 import com.mccm.managementapp.presentation.views.profile_edit.ProfileEditViewModel
 
@@ -59,18 +60,15 @@ fun ProfileEditContent(navController: NavHostController,
 }
 @Composable
 fun BoxHeader(viewModel: ProfileEditViewModel = hiltViewModel()){
-    val context = LocalContext.current
-    val imagePicker = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
-        onResult = {uri ->
-            uri?.let { viewModel.onGalleryResult(it) }
-        })
+    viewModel.resultingActivityHandler.handle()
+    var dialogState = remember { mutableStateOf(false)}
 
-    val cameraLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.TakePicture(),
-        onResult = {hasImage ->
-            viewModel.onResult(hasImage)
-        })
+    DialogCapturePicture(
+        status = dialogState,
+        takePhoto = {viewModel.takePhoto()},
+        pickImage = {viewModel.pickImage()}
+    )
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -81,23 +79,25 @@ fun BoxHeader(viewModel: ProfileEditViewModel = hiltViewModel()){
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally){
             Spacer(modifier = Modifier.height(68.dp))
-            if (viewModel.hasImage && viewModel.imageUri != null){
+            if (viewModel.state.image != ""){
                 AsyncImage(
                     modifier = Modifier
-                        .height(100.dp)
-                        .clip(CircleShape),
-                    model = viewModel.imageUri
-                    , contentDescription = "Selected image")
-            }
+                        .width(175.dp)
+                        .height(175.dp)
+                        .clip(CircleShape)
+                        .clickable {
+                            dialogState.value = true
+                        },
+                    model = viewModel.state.image,
+                    contentDescription = "Selected image",
+                    contentScale = ContentScale.Crop
+                )}
             else{
                 Image(
                     modifier = Modifier
                         .size(125.dp)
                         .clickable {
-                            //imagePicker.launch("image/*")
-                            val uri = ComposeFileProvider.getImageUri(context)
-                            viewModel.imageUri = uri
-                            cameraLauncher.launch(uri)
+                            dialogState.value = true
                         },
                     painter = painterResource(id = R.drawable.user_1),
                     contentDescription = ""
@@ -162,7 +162,7 @@ fun CardForm(viewModel: ProfileEditViewModel = hiltViewModel()){
                     .fillMaxWidth()
                     .padding(35.dp),
                 text = "Update",
-                onClick = {viewModel.onUpdate()},
+                onClick = {viewModel.saveImage()},
                 color = Orange400
             )
         }
